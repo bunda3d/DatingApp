@@ -1,8 +1,25 @@
-<h2>{{ title() }}</h2>
-<p>Welcome to the {{ title() }} application!</p>
+<div class="card card-lg:card-side card-border border-accent bg-base-100 shadow-sm mb-8">
+  <div class="card-body">
+    <h1 class="card-title">{{ title() }}</h1>
+    <p>Welcome to the {{ title() }} application!</p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary" type="button">Button</button>
+    </div>
+  </div>
+</div>
 
-<ul>
-  @for (member of members(); track member.id) {
-    <li>{{ member.id }} - {{ member.displayName }}</li>
-  }
-</ul>
+<div class="card card-lg:card-side card-border border-accent bg-base-100 shadow-sm mb-8">
+  <div class="card-body">
+    <h2 class="card-title">Users</h2>
+    <ul class="list bg-base-100 rounded-box shadow-md border-accent">
+      @for (member of members(); track member.id) {
+        <li class="list-row">
+          <div>{{ member.id }} :</div>
+          <p>
+            {{ member.displayName }}
+          </p>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
