@@ -1,4 +1,6 @@
-<div class="card card-lg:card-side card-border border-accent bg-base-100 shadow-sm mb-8">
+<div
+  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl w-1/2 mx-auto mb-8"
+>
   <div class="card-body">
     <h1 class="card-title">{{ title() }}</h1>
     <p>Welcome to the {{ title() }} application!</p>
@@ -8,16 +10,23 @@
   </div>
 </div>
 
-<div class="card card-lg:card-side card-border border-accent bg-base-100 shadow-sm mb-8">
+<div
+  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl w-1/2 mx-auto mb-8"
+>
   <div class="card-body">
     <h2 class="card-title">Users</h2>
     <ul class="list bg-base-100 rounded-box shadow-md border-accent">
       @for (member of members(); track member.id) {
-        <li class="list-row">
-          <div>{{ member.id }} :</div>
-          <p>
-            {{ member.displayName }}
-          </p>
+        <li class="list-row items-center card-border">
+          <div>
+            <img
+              class="size-12 rounded-box"
+              src="/user.png"
+              alt="user avatar for {{ member.displayName }}"
+            />
+          </div>
+          <div>{{ member.displayName }}</div>
+          <div>{{ member.id }}</div>
         </li>
       }
     </ul>

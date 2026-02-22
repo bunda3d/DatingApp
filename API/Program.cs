@@ -19,7 +19,7 @@ var app = builder.Build();
 app.UseCors(options => options
     .AllowAnyHeader()
     .AllowAnyMethod()
-    .WithOrigins("http://localhost:4200", "https://localhost:4200") // Enable front end Angular Client
+    .WithOrigins("https://localhost:4200") // Enable front end Angular Client
 );
 if (app.Environment.IsDevelopment())
 {
