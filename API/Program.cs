@@ -1,4 +1,6 @@
+using API.Contracts;
 using API.Data;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
