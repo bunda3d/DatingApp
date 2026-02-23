@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using API.Contracts;
 using API.Data;
 using API.Entities;
 using API.Models.DTOs;
@@ -9,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
     // localhost:5001/api/account
-    public class AccountController(AppDbContext context) : BaseApiController
+    public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
     {
         // POST: api/account/register
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (!await IsEmailUnique(registerDto.Email.ToLower().Trim()))
             {
@@ -32,11 +33,19 @@ namespace API.Controllers
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            return Ok(user);
+            var registeredUser = new UserDto
+            {
+                Id = user.Id.ToString(),
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = tokenService.CreateToken(user)
+            };
+
+            return Ok(registeredUser);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await context.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email.ToLower().Trim());
             if (user == null) return Unauthorized("Invalid email or password");
@@ -48,7 +57,15 @@ namespace API.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
-            return Ok(user);
+            var authedUser = new UserDto
+            {
+                Id = user.Id.ToString(),
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = tokenService.CreateToken(user)
+            };
+
+            return Ok(authedUser);
         }
 
         private async Task<bool> IsEmailUnique(string email)
