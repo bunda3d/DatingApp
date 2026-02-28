@@ -1,5 +1,5 @@
 <div
-  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl w-1/2 mx-auto mb-8"
+  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl md:w-auto lg:w-1/2 mx-auto mb-8"
 >
   <div class="card-body">
     <h1 class="card-title">{{ title() }}</h1>
@@ -11,7 +11,7 @@
 </div>
 
 <div
-  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl w-1/2 mx-auto mb-8"
+  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl md:w-auto lg:w-1/2 mx-auto mb-8"
 >
   <div class="card-body">
     <h2 class="card-title">Users</h2>
@@ -25,8 +25,12 @@
               alt="user avatar for {{ member.displayName }}"
             />
           </div>
-          <div>{{ member.displayName }}</div>
-          <div>{{ member.id }}</div>
+          <div class="flex min-w-0 flex-col sm:flex-row sm:items-center sm:w-full">
+            <div class="truncate">{{ member.displayName }}</div>
+            <div class="truncate text-sm opacity-70 sm:ml-auto sm:text-base sm:opacity-100">
+              {{ member.id }}
+            </div>
+          </div>
         </li>
       }
     </ul>

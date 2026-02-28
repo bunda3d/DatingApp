@@ -3,6 +3,7 @@ using System.Text;
 using API.Contracts;
 using API.Data;
 using API.Entities;
+using API.Extensions;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,15 +34,16 @@ namespace API.Controllers
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
+            /* 
             var registeredUser = new UserDto
             {
                 Id = user.Id.ToString(),
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Token = tokenService.CreateToken(user)
-            };
+            }; */
 
-            return Ok(registeredUser);
+            return Ok(user.ToUserDto(tokenService));
         }
 
         [HttpPost("login")]
@@ -57,15 +59,16 @@ namespace API.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
+            /* 
             var authedUser = new UserDto
             {
                 Id = user.Id.ToString(),
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Token = tokenService.CreateToken(user)
-            };
+            }; */
 
-            return Ok(authedUser);
+            return Ok(user.ToUserDto(tokenService));
         }
 
         private async Task<bool> IsEmailUnique(string email)

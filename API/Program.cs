@@ -21,7 +21,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var tokenKey = builder.Configuration["TokenKey"] ?? throw new InvalidOperationException("TokenKey is not configured");
+        var tokenKey = builder.Configuration["TokenKey"]
+            ?? throw new InvalidOperationException("TokenKey is not configured - Program.cs");
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
