@@ -34,15 +34,6 @@ namespace API.Controllers
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            /* 
-            var registeredUser = new UserDto
-            {
-                Id = user.Id.ToString(),
-                DisplayName = user.DisplayName,
-                Email = user.Email,
-                Token = tokenService.CreateToken(user)
-            }; */
-
             return Ok(user.ToUserDto(tokenService));
         }
 
@@ -58,15 +49,6 @@ namespace API.Controllers
             {
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
-
-            /* 
-            var authedUser = new UserDto
-            {
-                Id = user.Id.ToString(),
-                DisplayName = user.DisplayName,
-                Email = user.Email,
-                Token = tokenService.CreateToken(user)
-            }; */
 
             return Ok(user.ToUserDto(tokenService));
         }

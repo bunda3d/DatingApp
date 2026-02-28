@@ -2,17 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { Nav } from "../layout/nav/nav";
+import { APP_TITLE } from './app.config';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Nav],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements OnInit {
 
   private http = inject(HttpClient);
-  protected readonly title = signal('Dating App');
+  protected readonly title = signal(inject(APP_TITLE));
   protected members = signal<any>([]);
 
   // initialization
