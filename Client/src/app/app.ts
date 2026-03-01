@@ -6,11 +6,10 @@ import { Nav } from '../layout/nav/nav';
 import { APP_TITLE } from './app.config';
 import { AccountService } from '../core/services/account-service';
 import { User } from '../types/user';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Nav, NgClass],
+  imports: [RouterOutlet, Nav],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
