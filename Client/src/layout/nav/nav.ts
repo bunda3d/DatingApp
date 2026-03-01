@@ -12,15 +12,14 @@ import { AccountService } from '../../core/services/account-service';
   
 export class Nav {
   readonly title = signal(inject(APP_TITLE))
-  private accountService = inject(AccountService)
+  protected accountService = inject(AccountService)
   protected creds: any = {}
-  protected isLoggedIn = signal(false);
+  //protected isLoggedIn = signal(false);
 
   login() {
     this.accountService.login(this.creds).subscribe({
       next: result => {
         console.log(result);
-        this.isLoggedIn.set(true);
         this.creds = {}; //reset creds after login
       },
       error: error => alert(error.message)
@@ -28,6 +27,6 @@ export class Nav {
   }
 
   logout() {
-    this.isLoggedIn.set(false);
+    this.accountService.logout()
   }
 }
