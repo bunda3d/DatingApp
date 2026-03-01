@@ -40,7 +40,7 @@ export class ToastService {
     }, duration);
   }
 
-  // Toast methods
+  // Toast alert methods
   success(message: string, duration?: number) {
     this.createToastElement(message, 'alert-success', duration);
   }
