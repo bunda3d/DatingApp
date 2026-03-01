@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Nav } from '../layout/nav/nav';
 import { APP_TITLE } from './app.config';
 import { AccountService } from '../core/services/account-service';
-import { Home } from '../features/home/home';
 import { User } from '../types/user';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Nav, Home],
+  imports: [RouterOutlet, Nav, NgClass],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App implements OnInit {
   private readonly accountService = inject(AccountService);
+  protected router = inject(Router);
   private readonly http = inject(HttpClient);
   protected readonly title = signal(inject(APP_TITLE));
   protected members = signal<User[]>([]);

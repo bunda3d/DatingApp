@@ -2,7 +2,7 @@
 
 @import "tailwindcss";
 @plugin "daisyui"{
-  themes: garden --default
+  themes: light --default
 }
 
 /* to include dark mode:
@@ -13,3 +13,8 @@
   ;
 }
 */
+
+/* previously used theme, had bad 'accent' colors for selected links
+@plugin "daisyui"{
+  themes: garden --default
+} */
