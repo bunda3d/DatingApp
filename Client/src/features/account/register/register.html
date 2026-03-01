@@ -23,14 +23,8 @@
         placeholder="Password"
         [(ngModel)]="creds.password"
       />
-      <select class="select w-full">
-        <option disabled selected>Pick a member</option>
-        @for (member of membersFromHome(); track $index) {
-          <option value="{{ member.id }}">{{ member.displayName }}</option>
-        }
-      </select>
       <div class="flex items-center justify-end gap-3">
-        <button type="button" class="btn btn-secondary">Cancel</button>
+        <button (click)="cancel()" type="button" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Register</button>
       </div>
     </form>

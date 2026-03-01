@@ -1,43 +1,4 @@
 <app-nav />
 <div class="mt-16">
-  <app-home [membersFromApp]="members()" />
+  <app-home />
 </div>
-<!-- 
-<div
-  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl md:w-auto lg:w-1/2 mx-auto mb-8"
->
-  <div class="card-body">
-    <h1 class="card-title">{{ title() }}</h1>
-    <p>Welcome to the {{ title() }} application!</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary" type="button">Button</button>
-    </div>
-  </div>
-</div>
-
-<div
-  class="card card-lg:card-side card-border border-accent bg-base-100 shadow-xl md:w-auto lg:w-1/2 mx-auto mb-8"
->
-  <div class="card-body">
-    <h2 class="card-title">Users</h2>
-    <ul class="list bg-base-100 rounded-box shadow-md border-accent">
-      @for (member of members(); track member.id) {
-        <li class="list-row items-center card-border">
-          <div>
-            <img
-              class="size-12 rounded-box"
-              src="/user.png"
-              alt="user avatar for {{ member.displayName }}"
-            />
-          </div>
-          <div class="flex min-w-0 flex-col sm:flex-row sm:items-center sm:w-full">
-            <div class="truncate">{{ member.displayName }}</div>
-            <div class="truncate text-sm opacity-70 sm:ml-auto sm:text-base sm:opacity-100">
-              {{ member.id }}
-            </div>
-          </div>
-        </li>
-      }
-    </ul>
-  </div>
-</div> -->
