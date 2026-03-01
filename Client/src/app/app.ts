@@ -2,22 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { Nav } from "../layout/nav/nav";
+import { Nav } from '../layout/nav/nav';
 import { APP_TITLE } from './app.config';
 import { AccountService } from '../core/services/account-service';
-import { Home } from "../features/home/home";
+import { Home } from '../features/home/home';
+import { User } from '../types/user';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Nav, Home],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App implements OnInit {
-  private accountService = inject(AccountService);
-  private http = inject(HttpClient);
+  private readonly accountService = inject(AccountService);
+  private readonly http = inject(HttpClient);
   protected readonly title = signal(inject(APP_TITLE));
-  protected members = signal<any>([]);
+  protected members = signal<User[]>([]);
 
   // initialization
   async ngOnInit() {
@@ -33,13 +34,11 @@ export class App implements OnInit {
   }
 
   async getMembers() {
-    try { 
-      return lastValueFrom(this.http.get('https://localhost:5001/api/members'));
+    try {
+      return lastValueFrom(this.http.get<User[]>('https://localhost:5001/api/members'));
     } catch (err) {
       console.error(err);
       throw err;
     }
   }
-
-
 }

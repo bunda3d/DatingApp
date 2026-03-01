@@ -22,7 +22,8 @@
     </div>
   } @else {
     <div class="text-2xl text-center justify-center w-full lg:w-1/2 px-8 mb-8">
-      <app-register />
+      <!-- passing membersFromApp to the register component -->
+      <app-register [membersFromHome]="membersFromApp" />
     </div>
   }
 </div>
