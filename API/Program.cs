@@ -1,6 +1,7 @@
 using System.Text;
 using API.Contracts;
 using API.Data;
+using API.Middleware;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(options => options
     .AllowAnyHeader()
     .AllowAnyMethod()
